@@ -27,7 +27,7 @@ while True:
     mfcc_processed = np.mean(mfcc.T, axis=0)
 
     prediction = model.predict(np.expand_dims(mfcc_processed, axis=0))
-    if np.argmax(prediction) == 1:
+    if prediction[:, 1] == 1.0:
         print(f"Wake Word Detected for ({i})")
         print("Confidence:", prediction[:, 1])
         i += 1

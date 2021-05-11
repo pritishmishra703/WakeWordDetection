@@ -41,7 +41,7 @@ for class_label, list_of_files in data_path_dict.items():
         mfcc = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40) ## Apllying mfcc
         mfcc_processed = np.mean(mfcc.T, axis=0) ## some pre-processing
         all_data.append([mfcc_processed, class_label])
-    print(f"Done: Succesfully Preprocessed Class Label {class_label}")
+    print(f"Info: Succesfully Preprocessed Class Label {class_label}")
 
 df = pd.DataFrame(all_data, columns=["feature", "class_label"])
 
