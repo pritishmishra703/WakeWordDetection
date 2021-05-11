@@ -12,7 +12,7 @@ filename = "prediction.wav"
 class_names = ["Wake Word NOT Detected", "Wake Word Detected"]
 
 ##### LOADING OUR SAVED MODEL and PREDICTING ###
-model = load_model("saved_model/WWD.h5")
+model = load_model("saved_model/WWD2.h5")
 
 print("Prediction Started: ")
 i = 0
@@ -27,7 +27,7 @@ while True:
     mfcc_processed = np.mean(mfcc.T, axis=0)
 
     prediction = model.predict(np.expand_dims(mfcc_processed, axis=0))
-    if prediction[:, 1] == 1.0:
+    if prediction[:, 1] > 0.99:
         print(f"Wake Word Detected for ({i})")
         print("Confidence:", prediction[:, 1])
         i += 1
