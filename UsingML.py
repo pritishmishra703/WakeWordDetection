@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, classification_report
 from PCM.PCM import plot_confusion_matrix
+import pickle
 
 ##### Loading saved csv ##############
 df = pd.read_pickle("final_audio_data_csv/audio_data.csv")
@@ -33,3 +34,13 @@ y_pred = logit_reg.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 print(classification_report(y_test, y_pred))
 plot_confusion_matrix(cm, classes=["Does not have WW", "Has WW"])
+
+#### Save the model
+pickle.dump(logit_reg, open('saved_model/WWD_ML.txt', 'wb'))
+
+'''
+To load the model again run this:
+
+>>> model = pickle.load(open('saved_model/WWD_ML.txt', 'rb'))
+>>> model.predict(<-- your matrix -->) # to predict
+'''
